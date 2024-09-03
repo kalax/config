@@ -1,0 +1,99 @@
+{
+  "version": 72,
+  "data": {
+    "star_per_one_reward": 2,
+    "status_review": 0,
+    "score_install_app": 10,
+    "number_count_show_popup": 6,
+    "voa_categories": [
+      {
+        "title": "Story Programs",
+        "type": "story",
+        "items": [
+          {
+            "id": 1,
+            "name": "America"
+          },
+          {
+            "id": 2,
+            "name": "World"
+          },
+          {
+            "id": 3,
+            "name": "Education"
+          },
+          {
+            "id": 4,
+            "name": "American Stories"
+          },
+          {
+            "id": 5,
+            "name": "Health - Lifestyle"
+          },
+          {
+            "id": 6,
+            "name": "Science - Technology"
+          },
+          {
+            "id": 7,
+            "name": "Entertainment"
+          },
+          {
+            "id": 8,
+            "name": "History"
+          },
+          {
+            "id": 9,
+            "name": "Everyday Grammar"
+          }
+        ]
+      },
+      {
+        "title": "Video Programs",
+        "type": "video",
+        "items": [
+          {
+            "id": 10,
+            "name": "English in A Minute"
+          },
+          {
+            "id": 11,
+            "name": "Words News"
+          },
+          {
+            "id": 12,
+            "name": "Learning English TV"
+          },
+          {
+            "id": 13,
+            "name": "Everyday Grammar TV"
+          }
+        ]
+      }
+    ],
+    "more_apps": [
+      {
+        "title": "TOEIC® 2022 - Luyện thi TOEIC",
+        "bundle": "com.mdtteam.toeicApp",
+        "icon": "https://is3-ssl.mzstatic.com/image/thumb/Purple112/v4/2c/ea/3b/2cea3bf7-141b-f788-1878-623a45b93769/AppIcon-0-0-1x_U007emarketing-0-0-0-10-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/100x100bb.jpg",
+        "url": "https://apps.apple.com/us/app/toeic-2022-luy%E1%BB%87n-thi-toeic/id1609265936"
+      },
+      {
+        "title": "Wallive - Wallpapers 4K Live",
+        "bundle": "com.mdtteam.wallpapers",
+        "icon": "https://is4-ssl.mzstatic.com/image/thumb/Purple126/v4/1a/41/9d/1a419db5-f372-5476-e218-982788e6dec6/source/100x100bb.jpg",
+        "url": "https://apps.apple.com/us/app/wallive-wallpapers-4k-live/id1541138922"
+      },
+      {
+        "title": "Fancy Themes: Icons & Widgets",
+        "bundle": "com.mdtteam.themes.new",
+        "icon": "https://is3-ssl.mzstatic.com/image/thumb/Purple126/v4/cf/d6/f0/cfd6f06b-2c17-d37a-d15c-7f81436302e5/source/100x100bb.jpg",
+        "url": "https://apps.apple.com/us/app/fancy-themes-icons-widgets/id1580223308"
+      }
+    ],
+    "selected_category": 1,
+    "new_lesson_level1": "https://www.dropbox.com/s/07a4fs2v8eh210a/new_lesson_lv1.json?dl=1",
+    "new_lesson_level2": "https://www.dropbox.com/s/6fcla3qv1vvzpf1/new_lesson_lv2.json?dl=1",
+    "6minus": "https://www.dropbox.com/s/02ghwa5fhulufbw/6minus.json?dl=1"
+  }
+}
