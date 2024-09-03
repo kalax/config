@@ -1,8 +1,9 @@
 {
   "version": 72,
   "data": {
-    "star_per_one_reward": 2,
-    "number_count_show_popup": 6,
+    "number_read_per_one_reward": 2,
+    "number_read_reward_daily": 6,
+    "duration_time_show_ads": 300,
     "voa_categories": [
       {
         "title": "Story Programs",
