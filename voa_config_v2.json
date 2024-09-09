@@ -1,5 +1,5 @@
 {
-  "version": 81,
+  "version": 82,
   "data": {
     "star_per_one_reward": 2,
     "score_install_app": 10,
@@ -95,6 +95,5 @@
     "new_lesson_level2": "https://www.dropbox.com/s/6fcla3qv1vvzpf1/new_lesson_lv2.json?dl=1",
     "6minus": "https://www.dropbox.com/s/02ghwa5fhulufbw/6minus.json?dl=1",
     "bundle": "https://www.dropbox.com/scl/fi/i29yn9hvdkcp8lrxkw2uz/Archive1.zip?rlkey=5zne11fmxedpappl25ljkq7sl&dl=1",
-    "use_bundle": 1
   }
 }
