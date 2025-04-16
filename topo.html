@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chart</title>
+  </head>
+  <body>
+    <div class="chart-container"></div>
+  </body>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-org-chart@3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-flextree@2.1.2/build/d3-flextree.js"></script>
+  <div class="chart-container"></div>
+
+  <script>
+    function flattenNodes(nodes, parentId = null) {
+      let result = [];
+      nodes?.forEach((node) => {
+        const flatNode = Object.assign(node, {
+          id: node.nodeName,
+          parentId: parentId,
+          name: node.nodeName,
+        });
+        result.push(flatNode);
+        if (node.listEntryNodes && node.listEntryNodes.length > 0) {
+          const children = flattenNodes(node.listEntryNodes, node.nodeName);
+          result = result.concat(children);
+        }
+      });
+      return result;
+    }
+    function getPointOnCircle(angleDeg, cx, cy, r) {
+      var angleRad = (angleDeg * Math.PI) / 180;
+      var x = cx + r * Math.cos(angleRad);
+      var y = cy + r * Math.sin(angleRad);
+      return { x, y };
+    }
+    function random(cx, cy, r, lenght, color) {
+      var d = "";
+      const startAngle = Math.random();
+      for (let i = 0; i < lenght; i++) {
+        const angle = startAngle * 360 + i * 10;
+        const { x, y } = getPointOnCircle(angle, cx, cy, r);
+        d =
+          d +
+          ` <circle cx="${x.toFixed(2)}" cy="${y.toFixed(
+            2
+          )}" r="2" fill="${color}" >
+                <animate attributeName="opacity" values="4;0;4" dur="1s" repeatCount="indefinite"/>
+                </circle>`;
+      }
+      return d;
+    }
+    function loadChart(d) {
+      var data = [];
+      try {
+        var conver = JSON.parse(d);
+        data = flattenNodes(conver.result);
+      } catch (error) {}
+
+      var chart = null;
+      chart = new d3.OrgChart()
+        .compact(false)
+        .nodeHeight((d) => 140)
+        .nodeWidth((d) => 110)
+        .childrenMargin((d) => 50)
+        // .compactMarginBetween((d) => 0)
+        // .compactMarginPair((d) => 0)
+        // .neighbourMargin((a, b) => 0)
+        .onExpandOrCollapse((d) => chart.setCentered(d.data.id))
+        .linkUpdate(function (d, i, arr) {
+          d3.select(this)
+            .attr("stroke", "#ADCAFF")
+            .attr("stroke-width", "1px")
+            .attr("stroke-dasharray", "3,5");
+        })
+        .nodeContent(function (d, i, arr, state) {
+          var clientEntryList =
+            d && d.data && d.data.clientEntryList ? d.data.clientEntryList : [];
+
+          var nodeYellow = clientEntryList.filter(function (e) {
+            return e.speedQuality === "yellow";
+          });
+          var nodeRed = clientEntryList.filter(function (e) {
+            return e.speedQuality === "red";
+          });
+          var nodeBlue = clientEntryList.filter(function (e) {
+            return e.speedQuality === "blue";
+          });
+
+          var nodeRedLength = nodeRed && nodeRed.length ? nodeRed.length : 0;
+          var nodeYellowLength =
+            nodeYellow && nodeYellow.length ? nodeYellow.length : 0;
+          var nodeBlueLength =
+            nodeBlue && nodeBlue.length ? nodeBlue.length : 0;
+
+          var a = random(55, 55, 52, nodeRedLength, "#FF5040");
+          var b = random(55, 55, 44, nodeYellowLength, "#FFBE40");
+          var c = random(55, 55, 36, nodeBlueLength, "#33CC80");
+
+          return `
+          <div style="width: 110px; height: 140px; display: flex; flex-direction: column; align-items: center;">
+            <svg width="110" height="110">
+              <circle cx="55" cy="55" r="52" stroke="#CCDEFF" stroke-width="1" fill="#FFFFFF"/>
+              ${a}
+              <circle cx="55" cy="55" r="44" stroke="#CCDEFF" stroke-width="1" fill="transparent"/>
+              ${b}
+              <circle cx="55" cy="55" r="36" stroke="#CCDEFF" stroke-width="1" fill="transparent"/>
+              ${c}
+              <circle cx="55" cy="55" r="30" fill="#F4F4F4" />
+              <image href="./modem.png" x="25" y="30" width="60" height="60" />
+              <circle cx="75" cy="70" r="12" fill="#FFFFFF" />
+              <circle cx="75" cy="70" r="10" fill="#34404B" />
+              <text x="75" y="75" text-anchor="middle" fill="white" font-size="12" font-weight="bold">${
+                d.data.listEntryNodes.length ?? 0
+              }</text>
+              <circle cx="55" cy="25" r="12" fill="#FFFFFF" />
+              <circle cx="55" cy="25" r="10" fill="#D5FCE9" />
+              <image href="./wifi.png" x="45" y="14" width="20" height="20" />
+            </svg>
+            <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; max-width: 100%; padding-top: 4px;">
+              <div style="width:8px; height:8px; background:#33CC80; border-radius:50%; margin-right:6px; flex-shrink:0;"></div>
+              <div style="font-size:12px; font-weight:500; color:#34404B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width: 90px;" title="${
+                d.data.name
+              }">
+                ${d.data.name}
+              </div>
+            </div>
+          </div>
+        `;
+        })
+
+        .container(".chart-container")
+        .data(data)
+        .render();
+      chart.expandAll();
+      chart.onExpandOrCollapse((d) => chart.setCentered(d.data.id));
+    }
+  </script>
+  <script>
+    // var data = [
+    //   { id: 1, parentId: null, name: "node1" },
+    //   { id: 2, parentId: 1, name: "node2" },
+    //   { id: 3, parentId: 1, name: "node3" },
+    //   { id: 4, parentId: 3, name: "node4" },
+    //   { id: 5, parentId: 1, name: "node5" },
+    //   { id: 6, parentId: 2, name: "node6" },
+    //   { id: 7, parentId: 2, name: "node7" },
+    //   { id: 8, parentId: 5, name: "node8" },
+    //   { id: 14, parentId: 6, name: "node14" },
+    //   { id: 9, parentId: 5, name: "node9" },
+    //   { id: 10, parentId: 6, name: "node10" },
+    //   { id: 11, parentId: 6, name: "node11" },
+    //   { id: 12, parentId: 9, name: "node12" },
+    //   { id: 123, parentId: 8, name: "node123" },
+    //   { id: 15, parentId: 4, name: "node15" },
+    //   { id: 16, parentId: 15, name: "node16" },
+    //   { id: 17, parentId: 16, name: "node17" },
+    //   { id: 18, parentId: 16, name: "node18" },
+    // ];
+    const d = {
+      errorCode: "0",
+      result: [
+        {
+          nodeMac: "4c:12:e8:d6:81:b8",
+          nodeRssi: "0",
+          upStream: "4c:12:e8:d6:81:b8",
+          clientEntryList: [
+            {
+              status: "1",
+              interfaceType: "0",
+              clientRssi: "-9",
+              txRate: "",
+              rxRate: "",
+              isBlock: 0,
+              clientIp: "192.168.1.9",
+              clientMac: "52:12:e8:ba:06:5b",
+              speedQuality: "yellow",
+              hostName: "VNPT",
+            },
+            {
+              status: "1",
+              interfaceType: "1",
+              clientRssi: "-56",
+              txRate: "",
+              rxRate: "",
+              isBlock: 0,
+              clientIp: "192.168.1.12",
+              clientMac: "52:12:e8:bf:da:fa",
+              speedQuality: "yellow",
+              hostName: "VNPT",
+            },
+          ],
+          lastUpdate: "16-04-2025 14:54:37",
+          serialNumber: "VNPT04AD0371",
+          modelName: "GW020-H",
+          listEntryNodes: [
+            {
+              nodeMac: "cc:71:90:ed:f5:7c",
+              nodeRssi: "0",
+              upStream: "4c:12:e8:d6:81:b8",
+              clientEntryList: [
+                {
+                  status: "1",
+                  interfaceType: "1",
+                  clientRssi: "-70",
+                  txRate: "",
+                  rxRate: "",
+                  isBlock: 0,
+                  clientIp: "192.168.1.11",
+                  clientMac: "3c:01:ef:49:3b:90",
+                  speedQuality: "green",
+                  hostName: "N\\/A",
+                },
+              ],
+              lastUpdate: "16-04-2025 14:54:37",
+              serialNumber: "1292A4716EDF57C",
+              modelName: "EW12ST",
+              listEntryNodes: [],
+              nodeIp: "192.168.1.8",
+              deviceType: "1",
+              nodeName: "EW_edf57c",
+              firmwareVersion: "EW12ST000T0006",
+              location: "",
+              connectType: "0",
+              txRate: "1000 Mbps",
+              rxRate: "1000 Mbps",
+              hardwareVersion: "EW12ST000H0002",
+            },
+          ],
+          nodeIp: "192.168.1.1",
+          deviceType: "3",
+          nodeName: "GW020-H",
+          firmwareVersion: "G020E2VN00T006\\n",
+          location: "",
+          connectType: "429",
+          txRate: "",
+          rxRate: "",
+          hardwareVersion: "GW020-Hv1",
+        },
+      ],
+      message: "Success",
+    };
+    const data = JSON.stringify(d);
+    console.log({ data });
+    loadChart(data);
+  </script>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .chart-container {
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+    }
+  </style>
+</html>
