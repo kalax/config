@@ -52,12 +52,14 @@
       }
       return d;
     }
-    function loadChart(d) {
+    window.loadChart = function(d) {
       var data = [];
       try {
         var conver = JSON.parse(d);
         data = flattenNodes(conver.result);
-      } catch (error) {}
+      } catch (error) {
+
+      }
 
       var chart = null;
       chart = new d3.OrgChart()
@@ -139,111 +141,8 @@
     }
   </script>
   <script>
-    // var data = [
-    //   { id: 1, parentId: null, name: "node1" },
-    //   { id: 2, parentId: 1, name: "node2" },
-    //   { id: 3, parentId: 1, name: "node3" },
-    //   { id: 4, parentId: 3, name: "node4" },
-    //   { id: 5, parentId: 1, name: "node5" },
-    //   { id: 6, parentId: 2, name: "node6" },
-    //   { id: 7, parentId: 2, name: "node7" },
-    //   { id: 8, parentId: 5, name: "node8" },
-    //   { id: 14, parentId: 6, name: "node14" },
-    //   { id: 9, parentId: 5, name: "node9" },
-    //   { id: 10, parentId: 6, name: "node10" },
-    //   { id: 11, parentId: 6, name: "node11" },
-    //   { id: 12, parentId: 9, name: "node12" },
-    //   { id: 123, parentId: 8, name: "node123" },
-    //   { id: 15, parentId: 4, name: "node15" },
-    //   { id: 16, parentId: 15, name: "node16" },
-    //   { id: 17, parentId: 16, name: "node17" },
-    //   { id: 18, parentId: 16, name: "node18" },
-    // ];
-    const d = {
-      errorCode: "0",
-      result: [
-        {
-          nodeMac: "4c:12:e8:d6:81:b8",
-          nodeRssi: "0",
-          upStream: "4c:12:e8:d6:81:b8",
-          clientEntryList: [
-            {
-              status: "1",
-              interfaceType: "0",
-              clientRssi: "-9",
-              txRate: "",
-              rxRate: "",
-              isBlock: 0,
-              clientIp: "192.168.1.9",
-              clientMac: "52:12:e8:ba:06:5b",
-              speedQuality: "yellow",
-              hostName: "VNPT",
-            },
-            {
-              status: "1",
-              interfaceType: "1",
-              clientRssi: "-56",
-              txRate: "",
-              rxRate: "",
-              isBlock: 0,
-              clientIp: "192.168.1.12",
-              clientMac: "52:12:e8:bf:da:fa",
-              speedQuality: "yellow",
-              hostName: "VNPT",
-            },
-          ],
-          lastUpdate: "16-04-2025 14:54:37",
-          serialNumber: "VNPT04AD0371",
-          modelName: "GW020-H",
-          listEntryNodes: [
-            {
-              nodeMac: "cc:71:90:ed:f5:7c",
-              nodeRssi: "0",
-              upStream: "4c:12:e8:d6:81:b8",
-              clientEntryList: [
-                {
-                  status: "1",
-                  interfaceType: "1",
-                  clientRssi: "-70",
-                  txRate: "",
-                  rxRate: "",
-                  isBlock: 0,
-                  clientIp: "192.168.1.11",
-                  clientMac: "3c:01:ef:49:3b:90",
-                  speedQuality: "green",
-                  hostName: "N\\/A",
-                },
-              ],
-              lastUpdate: "16-04-2025 14:54:37",
-              serialNumber: "1292A4716EDF57C",
-              modelName: "EW12ST",
-              listEntryNodes: [],
-              nodeIp: "192.168.1.8",
-              deviceType: "1",
-              nodeName: "EW_edf57c",
-              firmwareVersion: "EW12ST000T0006",
-              location: "",
-              connectType: "0",
-              txRate: "1000 Mbps",
-              rxRate: "1000 Mbps",
-              hardwareVersion: "EW12ST000H0002",
-            },
-          ],
-          nodeIp: "192.168.1.1",
-          deviceType: "3",
-          nodeName: "GW020-H",
-          firmwareVersion: "G020E2VN00T006\\n",
-          location: "",
-          connectType: "429",
-          txRate: "",
-          rxRate: "",
-          hardwareVersion: "GW020-Hv1",
-        },
-      ],
-      message: "Success",
-    };
-    const data = JSON.stringify(d);
-    console.log({ data });
+    const data = "{\"message\":\"Success\",\"errorCode\":\"0\",\"result\":[{\"nodeMac\":\"4c:12:e8:d6:81:b8\",\"nodeRssi\":\"0\",\"upStream\":\"4c:12:e8:d6:81:b8\",\"clientEntryList\":[],\"lastUpdate\":\"16-04-2025 17:22:55\",\"serialNumber\":\"VNPT04AD0371\",\"modelName\":\"GW020-H\",\"listEntryNodes\":[{\"nodeMac\":\"4c:12:e8:ba:06:5a\",\"nodeRssi\":\"0\",\"upStream\":\"4c:12:e8:d6:81:b8\",\"clientEntryList\":[{\"status\":\"1\",\"interfaceType\":\"1\",\"clientRssi\":\"-54\",\"txRate\":\"\",\"rxRate\":\"\",\"isBlock\":0,\"clientIp\":\"192.168.1.5\",\"clientMac\":\"52:12:e8:bf:da:fa\",\"speedQuality\":\"yellow\",\"hostName\":\"VNPT\"}],\"lastUpdate\":\"16-04-2025 17:22:55\",\"serialNumber\":\"1292B2018BA065A\",\"modelName\":\"EW12ST\",\"listEntryNodes\":[{\"nodeMac\":\"cc:71:90:ed:f5:7c\",\"nodeRssi\":\"-41\",\"upStream\":\"4c:12:e8:ba:06:5a\",\"clientEntryList\":[],\"lastUpdate\":\"16-04-2025 17:22:55\",\"serialNumber\":\"1292A4716EDF57C\",\"modelName\":\"EW12ST\",\"listEntryNodes\":[],\"nodeIp\":\"192.168.1.4\",\"deviceType\":\"1\",\"nodeName\":\"EW_edf57c\",\"firmwareVersion\":\"EW12ST000T0006\",\"location\":\"\",\"connectType\":\"2\",\"txRate\":\"867 Mbps\",\"rxRate\":\"867 Mbps\",\"hardwareVersion\":\"EW12ST000H0002\"},{\"nodeMac\":\"4c:12:e8:b9:ea:36\",\"nodeRssi\":\"-58\",\"upStream\":\"4c:12:e8:ba:06:5a\",\"clientEntryList\":[{\"status\":\"1\",\"interfaceType\":\"0\",\"clientRssi\":\"-36\",\"txRate\":\"\",\"rxRate\":\"\",\"isBlock\":0,\"clientIp\":\"192.168.1.6\",\"clientMac\":\"f4:28:53:1e:b9:bf\",\"speedQuality\":\"yellow\",\"hostName\":\"namcong2001\"}],\"lastUpdate\":\"16-04-2025 17:22:55\",\"serialNumber\":\"1292B2018B9EA36\",\"modelName\":\"EW12ST\",\"listEntryNodes\":[],\"nodeIp\":\"192.168.1.10\",\"deviceType\":\"1\",\"nodeName\":\"EW_b9ea36\",\"firmwareVersion\":\"EW12ST000T0006\",\"location\":\"\",\"connectType\":\"2\",\"txRate\":\"867 Mbps\",\"rxRate\":\"867 Mbps\",\"hardwareVersion\":\"EW12ST000H0002\"}],\"nodeIp\":\"192.168.1.8\",\"deviceType\":\"0\",\"nodeName\":\"EW_ba065a\",\"firmwareVersion\":\"EW12ST000T0006\",\"location\":\"\",\"connectType\":\"0\",\"txRate\":\"1000 Mbps\",\"rxRate\":\"1000 Mbps\",\"hardwareVersion\":\"EW12ST000H0002\"}],\"nodeIp\":\"192.168.1.1\",\"deviceType\":\"3\",\"nodeName\":\"GW020-H\",\"firmwareVersion\":\"G020E2VN00T006\\n\",\"location\":\"\",\"connectType\":\"429\",\"txRate\":\"\",\"rxRate\":\"\",\"hardwareVersion\":\"GW020-Hv1\"}]}"
+    // const data = JSON.stringify(d);
     // loadChart(data);
   </script>
   <style>
