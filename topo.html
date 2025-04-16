@@ -24,7 +24,7 @@
   <script src="https://cdn.jsdelivr.net/npm/d3-org-chart@3"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3-flextree@2.1.2/build/d3-flextree.js"></script>
   <body>
-    <div> Version 1.2 </div>
+    <div> Version 1.3 </div>
     <div class="chart-container"></div>
     <script>
     function flattenNodes(nodes, parentId = null) {
@@ -66,14 +66,8 @@
       return d;
     }
     function loadChart(dataStr) {
-      var data = [];
-      try {
-        var conver = JSON.parse(dataStr);
-        data = flattenNodes(conver.result);
-      } catch (error) {
-
-      }
-
+      var conver = JSON.parse(dataStr);
+      var data = flattenNodes(conver.result);
       var chart = null;
       chart = new d3.OrgChart()
         .compact(false)
