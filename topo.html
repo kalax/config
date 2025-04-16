@@ -73,8 +73,8 @@
       return d;
     }
     
-    function loadChart(dataStr) {
-      var conver = JSON.parse(dataStr);
+    function loadChart(conver) {
+      // var conver = JSON.parse(dataStr);
       var data = flattenNodes(conver.result);
       var chart = new d3.OrgChart()
         .compact(false)
