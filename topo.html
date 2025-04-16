@@ -4,16 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chart</title>
+    <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: 'red;';
+    }
+    .chart-container {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+    }
+  </style>
   </head>
-  <body>
-    <div class="chart-container">version 1.1</div>
-  </body>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3-org-chart@3"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3-flextree@2.1.2/build/d3-flextree.js"></script>
-  <div class="chart-container"></div>
-
-  <script>
+  <body>
+    <div> Version 1.2 </div>
+    <div class="chart-container"></div>
+    <script>
     function flattenNodes(nodes, parentId = null) {
       let result = [];
       nodes?.forEach((node) => {
@@ -52,7 +65,7 @@
       }
       return d;
     }
-    window.loadChart = function(dataStr) {
+    function loadChart(dataStr) {
       var data = [];
       try {
         var conver = JSON.parse(dataStr);
@@ -99,8 +112,6 @@
           var c = random(55, 55, 36, nodeBlueLength, "#33CC80");
 
           return `
-          <div >
-            <div>${dataStr}</div>
           <div style="width: 110px; height: 140px; display: flex; flex-direction: column; align-items: center;">
             <svg width="110" height="110">
               <circle cx="55" cy="55" r="52" stroke="#CCDEFF" stroke-width="1" fill="#FFFFFF"/>
@@ -129,7 +140,6 @@
               </div>
             </div>
           </div>
-          </div>
         `;
         })
 
@@ -143,20 +153,8 @@
   <script>
     const data = "{\"message\":\"Success\",\"errorCode\":\"0\",\"result\":[{\"nodeMac\":\"4c:12:e8:d6:81:b8\",\"nodeRssi\":\"0\",\"upStream\":\"4c:12:e8:d6:81:b8\",\"clientEntryList\":[],\"lastUpdate\":\"16-04-2025 17:22:55\",\"serialNumber\":\"VNPT04AD0371\",\"modelName\":\"GW020-H\",\"listEntryNodes\":[{\"nodeMac\":\"4c:12:e8:ba:06:5a\",\"nodeRssi\":\"0\",\"upStream\":\"4c:12:e8:d6:81:b8\",\"clientEntryList\":[{\"status\":\"1\",\"interfaceType\":\"1\",\"clientRssi\":\"-54\",\"txRate\":\"\",\"rxRate\":\"\",\"isBlock\":0,\"clientIp\":\"192.168.1.5\",\"clientMac\":\"52:12:e8:bf:da:fa\",\"speedQuality\":\"yellow\",\"hostName\":\"VNPT\"}],\"lastUpdate\":\"16-04-2025 17:22:55\",\"serialNumber\":\"1292B2018BA065A\",\"modelName\":\"EW12ST\",\"listEntryNodes\":[{\"nodeMac\":\"cc:71:90:ed:f5:7c\",\"nodeRssi\":\"-41\",\"upStream\":\"4c:12:e8:ba:06:5a\",\"clientEntryList\":[],\"lastUpdate\":\"16-04-2025 17:22:55\",\"serialNumber\":\"1292A4716EDF57C\",\"modelName\":\"EW12ST\",\"listEntryNodes\":[],\"nodeIp\":\"192.168.1.4\",\"deviceType\":\"1\",\"nodeName\":\"EW_edf57c\",\"firmwareVersion\":\"EW12ST000T0006\",\"location\":\"\",\"connectType\":\"2\",\"txRate\":\"867 Mbps\",\"rxRate\":\"867 Mbps\",\"hardwareVersion\":\"EW12ST000H0002\"},{\"nodeMac\":\"4c:12:e8:b9:ea:36\",\"nodeRssi\":\"-58\",\"upStream\":\"4c:12:e8:ba:06:5a\",\"clientEntryList\":[{\"status\":\"1\",\"interfaceType\":\"0\",\"clientRssi\":\"-36\",\"txRate\":\"\",\"rxRate\":\"\",\"isBlock\":0,\"clientIp\":\"192.168.1.6\",\"clientMac\":\"f4:28:53:1e:b9:bf\",\"speedQuality\":\"yellow\",\"hostName\":\"namcong2001\"}],\"lastUpdate\":\"16-04-2025 17:22:55\",\"serialNumber\":\"1292B2018B9EA36\",\"modelName\":\"EW12ST\",\"listEntryNodes\":[],\"nodeIp\":\"192.168.1.10\",\"deviceType\":\"1\",\"nodeName\":\"EW_b9ea36\",\"firmwareVersion\":\"EW12ST000T0006\",\"location\":\"\",\"connectType\":\"2\",\"txRate\":\"867 Mbps\",\"rxRate\":\"867 Mbps\",\"hardwareVersion\":\"EW12ST000H0002\"}],\"nodeIp\":\"192.168.1.8\",\"deviceType\":\"0\",\"nodeName\":\"EW_ba065a\",\"firmwareVersion\":\"EW12ST000T0006\",\"location\":\"\",\"connectType\":\"0\",\"txRate\":\"1000 Mbps\",\"rxRate\":\"1000 Mbps\",\"hardwareVersion\":\"EW12ST000H0002\"}],\"nodeIp\":\"192.168.1.1\",\"deviceType\":\"3\",\"nodeName\":\"GW020-H\",\"firmwareVersion\":\"G020E2VN00T006\\n\",\"location\":\"\",\"connectType\":\"429\",\"txRate\":\"\",\"rxRate\":\"\",\"hardwareVersion\":\"GW020-Hv1\"}]}"
     // const data = JSON.stringify(d);
-    // loadChart(data);
+    loadChart(data);
+
   </script>
-  <style>
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-    }
-    .chart-container {
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-    }
-  </style>
+  </body>
 </html>
