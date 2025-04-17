@@ -81,6 +81,7 @@
       var data = flattenNodes(conver.result);
       var chart = new d3.OrgChart()
         .compact(false)
+        .svgHeight(window.innerHeight)
         .nodeHeight((d) => 140)
         .nodeWidth((d) => 110)
         .childrenMargin((d) => 50)
