@@ -960,11 +960,21 @@ Object.defineProperty(exports, '__esModule', { value: true });
         var y = cy + r * Math.sin(angleRad);
         return { x, y };
       }
+       function range(start, end, step) {
+          const result = [];
+          for (let i = start; i < end; i += step) {
+            result.push(i);
+          }
+          return result;
+      }
       function random(cx, cy, r, lenght, color) {
         var d = "";
+        var angles = range(0, 360, 12);
         const startAngle = Math.random();
         for (let i = 0; i < lenght; i++) {
-          const angle = Math.random() * 270 + i * 10;
+          const slot = angles[Math.floor(Math.random() * angles.length)];
+          const angle = slot + i * 12;
+          angles = angles.filter(ang => ang !== slot);
           const { x, y } = getPointOnCircle(angle, cx, cy, r);
           d =
             d +
@@ -1078,37 +1088,37 @@ Object.defineProperty(exports, '__esModule', { value: true });
             var c = random(cx, cy, r3, nodeBlueLength, "#33CC80");
             console.log({ d });
             return `
-          <div style="width: 110px; height: 140px; display: flex; flex-direction: column; align-items: center;">
-            <svg width="${cx * 2}" height="${cy * 2}">
-              <circle cx="${cx}" cy="${cy}" r="${r1}" stroke="#CCDEFF" stroke-width="1" fill="#FFFFFF"/>
-              ${a}
-              <circle cx="${cx}" cy="${cy}" r="${r2}" stroke="#CCDEFF" stroke-width="1" fill="transparent"/>
-              ${b}
-              <circle cx="${cx}" cy="${cy}" r="${r3}" stroke="#CCDEFF" stroke-width="1" fill="transparent"/>
-              ${c}
-              <circle cx="55" cy="55" r="30" fill="#F4F4F4" />
-              <image href="${nodeIcon(
-                d.data.deviceType
-              )}" x="25" y="30" width="60" height="60" />
-              <circle cx="72" cy="70" r="9" fill="#FFFFFF" />
-              <circle cx="72" cy="70" r="7" fill="#34404B" />
-              <text x="72" y="73" text-anchor="middle" fill="white" font-size="8" font-weight="bold">${
-                d.data.clientEntryList.length ?? 0
-              }</text>
+                  <div style="width: 110px; height: 140px; display: flex; flex-direction: column; align-items: center;">
+                    <svg width="${cx * 2}" height="${cy * 2}">
+                      <circle cx="${cx}" cy="${cy}" r="${r1}" stroke="#CCDEFF" stroke-width="1" fill="#FFFFFF"/>
+                      ${a}
+                      <circle cx="${cx}" cy="${cy}" r="${r2}" stroke="#CCDEFF" stroke-width="1" fill="transparent"/>
+                      ${b}
+                      <circle cx="${cx}" cy="${cy}" r="${r3}" stroke="#CCDEFF" stroke-width="1" fill="transparent"/>
+                      ${c}
+                      <circle cx="55" cy="55" r="30" fill="#F4F4F4" />
+                      <image href="${nodeIcon(
+                        d.data.deviceType
+                      )}" x="25" y="30" width="60" height="60" />
+                      <circle cx="72" cy="70" r="9" fill="#FFFFFF" />
+                      <circle cx="72" cy="70" r="7" fill="#34404B" />
+                      <text x="72" y="73" text-anchor="middle" fill="white" font-size="8" font-weight="bold">${
+                        d.data.clientEntryList.length ?? 0
+                      }</text>
 
-              ${checkConnectType(d.data.connectType, d.data.speedQuality)}
+                      ${checkConnectType(d.data.connectType, d.data.speedQuality)}
 
-            </svg>
-            <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; max-width: 100%; padding-top: 4px;">
-              <div style="width:8px; height:8px; background:#33CC80; border-radius:50%; margin-right:6px; flex-shrink:0;"></div>
-              <div style="font-size:12px; font-weight:500; color:#34404B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width: 90px;" title="${
-                d.data.name
-              }">
-                ${d.data.name}
-              </div>
-            </div>
-          </div>
-        `;
+                    </svg>
+                    <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; max-width: 100%; padding-top: 4px;">
+                      <div style="width:8px; height:8px; background:#33CC80; border-radius:50%; margin-right:6px; flex-shrink:0;"></div>
+                      <div style="font-size:12px; font-weight:500; color:#34404B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width: 90px;" title="${
+                        d.data.name
+                      }">
+                        ${d.data.name}
+                      </div>
+                    </div>
+                  </div>
+                  `;
           })
           .onNodeClick((d) => {
             const currentUrl =
@@ -1124,22 +1134,12 @@ Object.defineProperty(exports, '__esModule', { value: true });
         chart.expandAll();
         chart.onExpandOrCollapse((d) => chart.setCentered(d.data.id));
       }
-    function loadChart2(text) {
-        // const div = document.createElement("div");
-        // div.className = "my-div";
-        // div.textContent = text;
-        // document.getElementById("container").appendChild(div);
-        // loadChart(text)
-        // const data = "{\"message\":\"Success\",\"errorCode\":\"0\",\"result\":[{\"nodeMac\":\"4c:12:e8:d6:81:b8\",\"nodeRssi\":\"0\",\"upStream\":\"4c:12:e8:d6:81:b8\",\"clientEntryList\":[],\"lastUpdate\":\"16-04-2025 17:22:55\",\"serialNumber\":\"VNPT04AD0371\",\"modelName\":\"GW020-H\",\"listEntryNodes\":[{\"nodeMac\":\"4c:12:e8:ba:06:5a\",\"nodeRssi\":\"0\",\"upStream\":\"4c:12:e8:d6:81:b8\",\"clientEntryList\":[{\"status\":\"1\",\"interfaceType\":\"1\",\"clientRssi\":\"-54\",\"txRate\":\"\",\"rxRate\":\"\",\"isBlock\":0,\"clientIp\":\"192.168.1.5\",\"clientMac\":\"52:12:e8:bf:da:fa\",\"speedQuality\":\"yellow\",\"hostName\":\"VNPT\"}],\"lastUpdate\":\"16-04-2025 17:22:55\",\"serialNumber\":\"1292B2018BA065A\",\"modelName\":\"EW12ST\",\"listEntryNodes\":[{\"nodeMac\":\"cc:71:90:ed:f5:7c\",\"nodeRssi\":\"-41\",\"upStream\":\"4c:12:e8:ba:06:5a\",\"clientEntryList\":[],\"lastUpdate\":\"16-04-2025 17:22:55\",\"serialNumber\":\"1292A4716EDF57C\",\"modelName\":\"EW12ST\",\"listEntryNodes\":[],\"nodeIp\":\"192.168.1.4\",\"deviceType\":\"1\",\"nodeName\":\"EW_edf57c\",\"firmwareVersion\":\"EW12ST000T0006\",\"location\":\"\",\"connectType\":\"2\",\"txRate\":\"867 Mbps\",\"rxRate\":\"867 Mbps\",\"hardwareVersion\":\"EW12ST000H0002\"},{\"nodeMac\":\"4c:12:e8:b9:ea:36\",\"nodeRssi\":\"-58\",\"upStream\":\"4c:12:e8:ba:06:5a\",\"clientEntryList\":[{\"status\":\"1\",\"interfaceType\":\"0\",\"clientRssi\":\"-36\",\"txRate\":\"\",\"rxRate\":\"\",\"isBlock\":0,\"clientIp\":\"192.168.1.6\",\"clientMac\":\"f4:28:53:1e:b9:bf\",\"speedQuality\":\"yellow\",\"hostName\":\"namcong2001\"}],\"lastUpdate\":\"16-04-2025 17:22:55\",\"serialNumber\":\"1292B2018B9EA36\",\"modelName\":\"EW12ST\",\"listEntryNodes\":[],\"nodeIp\":\"192.168.1.10\",\"deviceType\":\"1\",\"nodeName\":\"EW_b9ea36\",\"firmwareVersion\":\"EW12ST000T0006\",\"location\":\"\",\"connectType\":\"2\",\"txRate\":\"867 Mbps\",\"rxRate\":\"867 Mbps\",\"hardwareVersion\":\"EW12ST000H0002\"}],\"nodeIp\":\"192.168.1.8\",\"deviceType\":\"0\",\"nodeName\":\"EW_ba065a\",\"firmwareVersion\":\"EW12ST000T0006\",\"location\":\"\",\"connectType\":\"0\",\"txRate\":\"1000 Mbps\",\"rxRate\":\"1000 Mbps\",\"hardwareVersion\":\"EW12ST000H0002\"}],\"nodeIp\":\"192.168.1.1\",\"deviceType\":\"3\",\"nodeName\":\"GW020-H\",\"firmwareVersion\":\"G020E2VN00T006\\n\",\"location\":\"\",\"connectType\":\"429\",\"txRate\":\"\",\"rxRate\":\"\",\"hardwareVersion\":\"GW020-Hv1\"}]}"
-    // const data = JSON.stringify(d);
-        loadChart(text);
-      }
+   
   </script>
   <script>
     const data = "{\n    \"errorCode\": \"0\",\n    \"message\": \"Success\",\n    \"result\": [\n        {\n            \"nodeName\": \"GW020-H\",\n            \"modelName\": \"GW020-H\",\n            \"firmwareVersion\": \"G020E2VN00T006\\n\",\n            \"nodeMac\": \"4c:12:e8:d6:81:b8\",\n            \"serialNumber\": \"VNPT04AD0371\",\n            \"nodeIp\": \"192.168.1.1\",\n            \"deviceType\": \"3\",\n            \"connectType\": \"429\",\n            \"nodeRssi\": \"0\",\n            \"hardwareVersion\": \"GW020-Hv1\",\n            \"location\": \"\",\n            \"upStream\": \"4c:12:e8:d6:81:b8\",\n            \"txRate\": \"\",\n            \"rxRate\": \"\",\n            \"clientEntryList\": [],\n            \"listEntryNodes\": [\n                {\n                    \"nodeName\": \"EW_ba065a\",\n                    \"modelName\": \"EW12ST\",\n                    \"firmwareVersion\": \"EW12ST000T0006\",\n                    \"nodeMac\": \"4c:12:e8:ba:06:5a\",\n                    \"serialNumber\": \"1292B2018BA065A\",\n                    \"nodeIp\": \"192.168.1.8\",\n                    \"deviceType\": \"0\",\n                    \"connectType\": \"0\",\n                    \"nodeRssi\": \"0\",\n                    \"hardwareVersion\": \"EW12ST000H0002\",\n                    \"location\": \"\",\n                    \"upStream\": \"4c:12:e8:d6:81:b8\",\n                    \"txRate\": \"1000 Mbps\",\n                    \"rxRate\": \"1000 Mbps\",\n                    \"clientEntryList\": [\n                        {\n                            \"hostName\": \"VNPT\",\n                            \"interfaceType\": \"1\",\n                            \"clientIp\": \"192.168.1.5\",\n                            \"clientMac\": \"52:12:e8:bf:da:fa\",\n                            \"clientRssi\": \"-49\",\n                            \"status\": \"1\",\n                            \"txRate\": \"\",\n                            \"rxRate\": \"\",\n                            \"isBlock\": 0,\n                            \"speedQuality\": \"green\"\n                        }\n                    ],\n                    \"listEntryNodes\": [\n                        {\n                            \"nodeName\": \"EW_edf57c\",\n                            \"modelName\": \"EW12ST\",\n                            \"firmwareVersion\": \"EW12ST000T0006\",\n                            \"nodeMac\": \"cc:71:90:ed:f5:7c\",\n                            \"serialNumber\": \"1292A4716EDF57C\",\n                            \"nodeIp\": \"192.168.1.4\",\n                            \"deviceType\": \"1\",\n                            \"connectType\": \"2\",\n                            \"nodeRssi\": \"-47\",\n                            \"hardwareVersion\": \"EW12ST000H0002\",\n                            \"location\": \"\",\n                            \"upStream\": \"4c:12:e8:ba:06:5a\",\n                            \"txRate\": \"867 Mbps\",\n                            \"rxRate\": \"867 Mbps\",\n                            \"clientEntryList\": [\n                                {\n                                    \"hostName\": \"namcong2001\",\n                                    \"interfaceType\": \"0\",\n                                    \"clientIp\": \"192.168.1.6\",\n                                    \"clientMac\": \"f4:28:53:1e:b9:bf\",\n                                    \"clientRssi\": \"-49\",\n                                    \"status\": \"1\",\n                                    \"txRate\": \"\",\n                                    \"rxRate\": \"\",\n                                    \"isBlock\": 0,\n                                    \"speedQuality\": \"green\"\n                                },\n                                {\n                                    \"hostName\": \"N/A\",\n                                    \"interfaceType\": \"1\",\n                                    \"clientIp\": \"192.168.1.15\",\n                                    \"clientMac\": \"1a:78:13:b1:1b:f7\",\n                                    \"clientRssi\": \"-61\",\n                                    \"status\": \"1\",\n                                    \"txRate\": \"\",\n                                    \"rxRate\": \"\",\n                                    \"isBlock\": 0,\n                                    \"speedQuality\": \"green\"\n                                }\n                            ],\n                            \"listEntryNodes\": [],\n                            \"lastUpdate\": \"17-04-2025 16:32:20\",\n                            \"deviceName\": \"EW12ST\",\n                            \"speedQuality\": \"green\"\n                        },\n                        {\n                            \"nodeName\": \"EW_b9ea36\",\n                            \"modelName\": \"EW12ST\",\n                            \"firmwareVersion\": \"EW12ST000T0006\",\n                            \"nodeMac\": \"4c:12:e8:b9:ea:36\",\n                            \"serialNumber\": \"1292B2018B9EA36\",\n                            \"nodeIp\": \"192.168.1.10\",\n                            \"deviceType\": \"1\",\n                            \"connectType\": \"2\",\n                            \"nodeRssi\": \"-49\",\n                            \"hardwareVersion\": \"EW12ST000H0002\",\n                            \"location\": \"\",\n                            \"upStream\": \"4c:12:e8:ba:06:5a\",\n                            \"txRate\": \"867 Mbps\",\n                            \"rxRate\": \"867 Mbps\",\n                            \"clientEntryList\": [],\n                            \"listEntryNodes\": [],\n                            \"lastUpdate\": \"17-04-2025 16:32:20\",\n                            \"deviceName\": \"EW12ST\",\n                            \"speedQuality\": \"green\"\n                        }\n                    ],\n                    \"lastUpdate\": \"17-04-2025 16:32:20\",\n                    \"deviceName\": \"Ont-Cap\",\n                    \"speedQuality\": \"green\"\n                },\n                {\n                    \"nodeName\": \"EW_bfdaf8\",\n                    \"modelName\": \"EW302S\",\n                    \"firmwareVersion\": \"EW302S000R0003\",\n                    \"nodeMac\": \"4C:12:E8:BF:DA:F8\",\n                    \"serialNumber\": \"1022B1718BFDAF8\",\n                    \"nodeIp\": \"192.168.88.1\",\n                    \"deviceType\": \"0\",\n                    \"connectType\": \"2\",\n                    \"nodeRssi\": \"-55\",\n                    \"hardwareVersion\": \"EW302S000H0001\",\n                    \"location\": \"\",\n                    \"upStream\": \"00:00:00:00:00:00\",\n                    \"txRate\": \"1201 Mbps\",\n                    \"rxRate\": \"1201 Mbps\",\n                    \"clientEntryList\": [],\n                    \"listEntryNodes\": [\n                        {\n                            \"nodeName\": \"EW_0b6700\",\n                            \"modelName\": \"EW302S\",\n                            \"firmwareVersion\": \"EW302S000T0003\",\n                            \"nodeMac\": \"A4:F4:C2:0B:67:00\",\n                            \"serialNumber\": \"1020A20130B6700\",\n                            \"nodeIp\": \"192.168.88.166\",\n                            \"deviceType\": \"1\",\n                            \"connectType\": \"2\",\n                            \"nodeRssi\": \"-35\",\n                            \"hardwareVersion\": \"EW302S000H0001\",\n                            \"location\": \"\",\n                            \"upStream\": \"4C:12:E8:BF:DA:F8\",\n                            \"txRate\": \"1201 Mbps\",\n                            \"rxRate\": \"1201 Mbps\",\n                            \"clientEntryList\": [\n                                {\n                                    \"hostName\": \"\",\n                                    \"interfaceType\": \"1\",\n                                    \"clientIp\": \"\",\n                                    \"clientMac\": \"3C:01:EF:49:3B:90\",\n                                    \"clientRssi\": \"-32\",\n                                    \"status\": \"1\",\n                                    \"txRate\": \"90Mbps\",\n                                    \"rxRate\": \"1Mbps\",\n                                    \"isBlock\": 0,\n                                    \"speedQuality\": \"green\"\n                                }\n                            ],\n                            \"listEntryNodes\": [],\n                            \"lastUpdate\": \"17-04-2025 16:32:20\",\n                            \"deviceName\": \"EW302S\",\n                            \"speedQuality\": \"green\"\n                        },\n                        {\n                            \"nodeName\": \"EW_3c582d\",\n                            \"modelName\": \"EW302S\",\n                            \"firmwareVersion\": \"EW302S000T0003\",\n                            \"nodeMac\": \"4C:12:E8:3C:58:2D\",\n                            \"serialNumber\": \"1022A40183C582D\",\n                            \"nodeIp\": \"192.168.88.147\",\n                            \"deviceType\": \"1\",\n                            \"connectType\": \"2\",\n                            \"nodeRssi\": \"-33\",\n                            \"hardwareVersion\": \"EW302S000H0001\",\n                            \"location\": \"\",\n                            \"upStream\": \"4C:12:E8:BF:DA:F8\",\n                            \"txRate\": \"1201 Mbps\",\n                            \"rxRate\": \"1201 Mbps\",\n                            \"clientEntryList\": [\n                                {\n                                    \"hostName\": \"\",\n                                    \"interfaceType\": \"1\",\n                                    \"clientIp\": \"\",\n                                    \"clientMac\": \"62:6F:BB:BD:4F:AD\",\n                                    \"clientRssi\": \"-62\",\n                                    \"status\": \"1\",\n                                    \"txRate\": \"195Mbps\",\n                                    \"rxRate\": \"1Mbps\",\n                                    \"isBlock\": 0,\n                                    \"speedQuality\": \"green\"\n                                }\n                            ],\n                            \"listEntryNodes\": [],\n                            \"lastUpdate\": \"17-04-2025 16:32:20\",\n                            \"deviceName\": \"EW302S\",\n                            \"speedQuality\": \"green\"\n                        }\n                    ],\n                    \"lastUpdate\": \"17-04-2025 16:32:20\",\n                    \"deviceName\": \"EW302S\",\n                    \"speedQuality\": \"green\"\n                },\n                {\n                    \"nodeName\": \"EW_baeb3e\",\n                    \"modelName\": \"EW12ST\",\n                    \"firmwareVersion\": \"EW12ST000T0006\",\n                    \"nodeMac\": \"4C:12:E8:BA:EB:3E\",\n                    \"serialNumber\": \"1292B2018BAEB3E\",\n                    \"nodeIp\": \"192.168.88.1\",\n                    \"deviceType\": \"0\",\n                    \"connectType\": \"0\",\n                    \"nodeRssi\": \"\",\n                    \"hardwareVersion\": \"EW12ST000H0002\",\n                    \"location\": \"\",\n                    \"upStream\": \"00:00:00:00:00:00\",\n                    \"txRate\": \"1000 Mbps\",\n                    \"rxRate\": \"1000 Mbps\",\n                    \"clientEntryList\": [],\n                    \"listEntryNodes\": [\n                        {\n                            \"nodeName\": \"EW_bb504e\",\n                            \"modelName\": \"EW12ST\",\n                            \"firmwareVersion\": \"EW12ST000T0006\",\n                            \"nodeMac\": \"4C:12:E8:BB:50:4E\",\n                            \"serialNumber\": \"1292B2018BB504E\",\n                            \"nodeIp\": \"192.168.88.175\",\n                            \"deviceType\": \"1\",\n                            \"connectType\": \"2\",\n                            \"nodeRssi\": \"-52\",\n                            \"hardwareVersion\": \"EW12ST000H0002\",\n                            \"location\": \"\",\n                            \"upStream\": \"4C:12:E8:BA:EB:3E\",\n                            \"txRate\": \"867 Mbps\",\n                            \"rxRate\": \"867 Mbps\",\n                            \"clientEntryList\": [],\n                            \"listEntryNodes\": [],\n                            \"lastUpdate\": \"17-04-2025 16:32:20\",\n                            \"deviceName\": \"Meshcap\",\n                            \"speedQuality\": \"green\"\n                        }\n                    ],\n                    \"lastUpdate\": \"17-04-2025 16:32:20\",\n                    \"deviceName\": \"EW12ST\",\n                    \"speedQuality\": \"red\"\n                }\n            ],\n            \"lastUpdate\": \"17-04-2025 16:32:20\",\n            \"deviceName\": \"Lan test\",\n            \"speedQuality\": \"green\"\n        }\n    ]\n}"
     // const data = JSON.stringify(d);
     // loadChart(data);
-    // loadChart2(data);///
   </script>
   </body>
 </html>
