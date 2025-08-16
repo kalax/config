@@ -1,5 +1,5 @@
 {
-  "version": 78,
+  "version": 79,
   "data": {
     "number_read_per_one_reward": 4,
     "number_read_reward_daily": 6,
@@ -94,7 +94,7 @@
     "new_lesson_level1": "https://www.dropbox.com/s/07a4fs2v8eh210a/new_lesson_lv1.json?dl=1",
     "new_lesson_level2": "https://www.dropbox.com/s/6fcla3qv1vvzpf1/new_lesson_lv2.json?dl=1",
     "6minus": "https://www.dropbox.com/s/02ghwa5fhulufbw/6minus.json?dl=1",
-    "hash_key": "/iV1l5kiuQi71yQoqzeBXa/yfxJRBchgblqFO35VIysDdC1eKZgeMkAVn65p4ESOTUuJ2SnOHnFAhkBhzzgYJtTFaZxwCQ9t0IHM98GNWSE9whQvTbI3txfzy6pdWsqFfiWVrqqXdtoLWPSqZ0TXVxkGqFWjQSTtxExoZ9In6JjPa+FRzpS8So9A3YiMELa9vA1IfdKY351/sB+Hb6AKP4SzjKvfzF5rzOdPAlnlfZDXnJ/ulCBXJlwaKazCXqQBfs4s8c1ZKTpOiqn6NEkXwDZUaYSdGxT2RJPGGjhVsd9RT8VR/u4sqluB2R+2y64vwRGHrMbh63EFlkp4JtrfMZ7VvCDMZIIvvU7400hWVylLk2f9C5SyTsLNt7e85wHP",
+    "hash_key": "/iV1l5kiuQi71yQoqzeBXa/yfxJRBchgblqFO35VIysDdC1eKZgeMkAVn65p4ESOBxtNlT2mlwOL2PeQnOAofhS+NLnMemHVXexbFfR2oMxxaIjwXNgORyEFlYhl1WkLPcGzrdrUTYwboS2O07+vRXaMpqJdwFSHMzeYDTgl+Ay89xTuvFaz8mEnJw3WvqDm0ZVIxpKylEDBIyC7fExDKPujAkGOkd58WjTBj8O5gIiq5bkBAJiqz82iZ3QeDBEVU2ZaPxhhFJaINZTSdWzshPwzl2wLUv9dB1EE8Tbu56zHBEMlqsMkSCMgmYytTQBCdwBV71KpFnXpnEJaj1qJRlbsCBW9nDYhhThulgXukp1YlSF9Y4LwmTfinfU0cD5h",
     "use_bundle": 1
   }
 }
